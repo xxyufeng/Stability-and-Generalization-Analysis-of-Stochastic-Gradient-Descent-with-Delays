@@ -1,6 +1,13 @@
 # Stability-and-Generalization-Analysis-of-Stochastic-Gradient-Descent-with-Delays
 This repository is the implementation of the section numerical experiments of paper "Stability and Generalization Analysis of Stochastic Gradient Descent with Delays."
 
+## Requirement
+```
+torch >= 2.5.1
+torch >= 0.20.1
+numpy >= 2.0.2
+```
+
 ## Usage
 Collected typical experiment configurations (reproducible via CLI):
 1. MNIST (fcnet_mnist, CE)
@@ -16,7 +23,7 @@ Collected typical experiment configurations (reproducible via CLI):
                              --num-workers-list 1,11,21,31 --repeats 5 --seed-base 0 --seed-step 10 --device cuda
    ```
 
-## Main arguments:
+## Main arguments
 ```
       --dataset            One of {rcv1, gisette, ijcnn, w1a, mnist, cifar10}
       --model              Model name matching the dataset
@@ -31,9 +38,11 @@ Collected typical experiment configurations (reproducible via CLI):
       --train-type         fixed | random (scheduling strategy)
 ```
 
-## Notes:
+## Notes
 1. Fixed delay = num_worker - 1
+   
      Local workers communicate with server sequentially, and the server conduct model update once it receive the gradients calculated by local workers. Therefore, the delay is fixed as "num_worker -1".
+   
 2. Each repeat uses seed = seed_base + (repeat_index - 1) * seed_step.
 3. Output folders:
    logs/          text metric logs
